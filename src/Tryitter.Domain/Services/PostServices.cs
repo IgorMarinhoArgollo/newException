@@ -5,6 +5,11 @@ namespace Tryitter.Domain.Services
 {
   public class PostServices : IServices<Post>
   {
+    private readonly IRepository<Post> _repository;
+    PostServices(IRepository<Post> repository)
+    {
+      _repository = repository;
+    }
     public Post Create(Post entity)
     {
       throw new NotImplementedException();

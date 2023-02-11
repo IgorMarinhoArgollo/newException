@@ -6,6 +6,11 @@ namespace Tryitter.Domain.Services
 {
   public class UserServices : IServices<User>
   {
+    private readonly IRepository<User> _repository;
+    UserServices(IRepository<User> repository)
+    {
+      _repository = repository;
+    }
     public User Create(User entity)
     {
       throw new NotImplementedException();
