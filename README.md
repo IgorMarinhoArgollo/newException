@@ -29,6 +29,7 @@
   
   ## Tecnologias usadas
   * C#
+  * Inspirado na arquitetura DDD
   * Programação Orientada a Objeto (POO)
   * SQL Server<br><br>
   
