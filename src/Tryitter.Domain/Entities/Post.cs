@@ -1,6 +1,6 @@
 namespace Tryitter.Domain.Entities
 {
-  public class PostRequest
+  public class Post
   {
     public int Id { get; set; }
     public string Title { get; set; }
