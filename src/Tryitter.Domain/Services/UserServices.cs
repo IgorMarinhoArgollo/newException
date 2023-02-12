@@ -13,27 +13,42 @@ namespace Tryitter.Domain.Services
     }
     public User Create(User entity)
     {
-      throw new NotImplementedException();
+      if (!string.IsNullOrEmpty(entity.Name) && !string.IsNullOrEmpty(entity.Password) && !string.IsNullOrEmpty(entity.Email))
+      {
+        User result = _repository.Create(entity);
+        return result;
+      }
+      return null;
     }
 
     public bool Delete(int id)
     {
-      throw new NotImplementedException();
+      if (GetById(id) != null)
+      {
+        _repository.Delete(id);
+        return true;
+      }
+      return false;
     }
 
     public IEnumerable<User> GetAll()
     {
-      throw new NotImplementedException();
+      return _repository.GetAll();
     }
 
     public User? GetById(int id)
     {
-      throw new NotImplementedException();
+      return _repository.GetById(id);
     }
 
     public User Update(int id, User entity)
     {
-      throw new NotImplementedException();
+      if (id < 0 && GetById(id) != null && !string.IsNullOrEmpty(entity.Name) && !string.IsNullOrEmpty(entity.Email) && !string.IsNullOrEmpty(entity.Password))
+      {
+        var result = _repository.Update(id, entity);
+        return result;
+      }
+      return null;
     }
   }
 

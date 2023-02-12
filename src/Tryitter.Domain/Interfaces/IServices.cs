@@ -6,8 +6,8 @@ namespace Tryitter.Domain.Interfaces
   {
     T? GetById(int id);
     IEnumerable<T> GetAll();
-    T Create(T entity);
-    T Update(int id, T entity);
+    T? Create(T entity);
+    T? Update(int id, T entity);
     bool Delete(int id);
   }
 }

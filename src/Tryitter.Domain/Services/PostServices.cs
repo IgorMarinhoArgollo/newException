@@ -1,5 +1,6 @@
 using Tryitter.Domain.Entities;
 using Tryitter.Domain.Interfaces;
+using System;
 
 namespace Tryitter.Domain.Services
 {
@@ -12,27 +13,40 @@ namespace Tryitter.Domain.Services
     }
     public Post Create(Post entity)
     {
-      throw new NotImplementedException();
+      if(!string.IsNullOrEmpty(entity.Title) && !string.IsNullOrEmpty(entity.Text)) {
+        Post result = _repository.Create(entity);
+        return result;
+      }
+      return null;
     }
 
     public bool Delete(int id)
     {
-      throw new NotImplementedException();
+      if(GetById(id) != null) {
+        _repository.Delete(id);
+        return true;
+      }
+      return false;
     }
 
     public IEnumerable<Post> GetAll()
     {
-      throw new NotImplementedException();
+      return _repository.GetAll();
     }
 
     public Post? GetById(int id)
     {
-      throw new NotImplementedException();
+      return _repository.GetById(id);
     }
 
     public Post Update(int id, Post entity)
     {
-      throw new NotImplementedException();
+      if (GetById(id) != null && !string.IsNullOrEmpty(entity.Title) && !string.IsNullOrEmpty(entity.Text))
+      {
+        var result = _repository.Update(id, entity);
+        return result;
+      }
+      return null;
     }
   }
 }
