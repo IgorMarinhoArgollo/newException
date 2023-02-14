@@ -1,4 +1,4 @@
-namespace Tryitter.Domain.Entities
+namespace Tryitter.Domain.Models
 {
   public class User
   {
@@ -6,5 +6,7 @@ namespace Tryitter.Domain.Entities
     public string Name { get; set; }
     public string Email { get; set; }
     public string Password { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
   }
 }
