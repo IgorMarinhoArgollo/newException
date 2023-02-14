@@ -14,21 +14,21 @@ public class UserInsertValidation : AbstractValidator<User>
   {
     _userRepository = customerRepository;
 
-    RuleFor(x => x.Email)
+    RuleFor(user => user.Email)
         .NotNull()
         .WithMessage("Email can not be null");
 
-    RuleFor(x => x.Name)
+    RuleFor(user => user.Name)
         .NotNull()
         .WithMessage("Name can not be null");
 
-    RuleFor(x => x.Password)
+    RuleFor(user => user.Password)
         .NotNull()
         .WithMessage("Name can not be null");
 
-    RuleFor(x => x)
+    RuleFor(user => user)
         .MustAsync(ValidationName)
-        .WithMessage("Nome já cadastrado na base de dados");
+        .WithMessage("User already registered");
   }
 
   private async Task<bool> ValidationName(User user, CancellationToken cancellationToken)

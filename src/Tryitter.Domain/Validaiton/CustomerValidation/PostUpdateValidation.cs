@@ -10,15 +10,15 @@ public class PostUpdateValidation : AbstractValidator<Post>
 {
   public PostUpdateValidation()
   {
-    RuleFor(x => x.Id)
+    RuleFor(post => post.Id)
         .NotNull()
         .WithMessage("Id can not be null");
 
-    RuleFor(x => x.Title)
+    RuleFor(post => post.Title)
         .NotNull()
         .WithMessage("Email can not be null");
 
-    RuleFor(x => x.Text)
+    RuleFor(post => post.Text)
         .NotNull()
         .WithMessage("Nome can not be null");
   }

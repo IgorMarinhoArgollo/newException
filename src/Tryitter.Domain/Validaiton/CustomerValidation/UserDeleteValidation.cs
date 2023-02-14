@@ -7,7 +7,7 @@ public class UserDeleteValidation : AbstractValidator<User>
 {
     public UserDeleteValidation()
     {
-        RuleFor(x => x.Id)
+        RuleFor(user => user.Id)
             .NotNull()
             .WithMessage("Id can not be null");
     }

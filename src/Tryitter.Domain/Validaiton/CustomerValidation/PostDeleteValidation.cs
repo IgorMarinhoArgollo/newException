@@ -7,7 +7,7 @@ public class PostDeleteValidation : AbstractValidator<Post>
 {
     public PostDeleteValidation()
     {
-        RuleFor(x => x.Id)
+        RuleFor(post => post.Id)
             .NotNull()
             .WithMessage("Id can not be null");
     }
