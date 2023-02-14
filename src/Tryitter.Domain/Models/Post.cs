@@ -1,4 +1,4 @@
-namespace Tryitter.Domain.Entities
+namespace Tryitter.Domain.Models
 {
   public class Post
   {
@@ -6,6 +6,8 @@ namespace Tryitter.Domain.Entities
     public string Title { get; set; }
     public string Text { get; set; }
     public string Image { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
 
   }
 }
