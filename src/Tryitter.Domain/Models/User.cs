@@ -8,5 +8,6 @@ namespace Tryitter.Domain.Models
     public string Password { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
+    public List<Post> Posts {get; set;}    
   }
 }
