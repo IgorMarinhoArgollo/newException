@@ -9,5 +9,7 @@ namespace Tryitter.Domain.Models
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
 
+    public User User {get; set;}
+
   }
 }
