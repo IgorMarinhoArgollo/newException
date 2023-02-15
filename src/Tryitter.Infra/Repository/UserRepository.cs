@@ -14,29 +14,33 @@ namespace Tryitter.Infra.Repository
       _context = context;
     }
 
-    public Task<User> Create(User user)
+    public async Task<User> Create(User user)
     {
-      throw new NotImplementedException();
+      _context.Users.Add(user);
+      await _context.SaveChangesAsync();
+      return user;
     }
 
-    public Task Delete(User user)
+    public async Task Delete(User user)
     {
-      throw new NotImplementedException();
+      _context.Users.Remove(user);
+      await _context.SaveChangesAsync();
     }
 
-    public Task<IEnumerable<User>> GetAll()
+    public async Task<IEnumerable<User>> GetAll()
     {
-      throw new NotImplementedException();
+      return _context.Users.ToList();
     }
 
-    public Task<User> GetById(int id)
+    public async Task<User> GetById(int id)
     {
-      throw new NotImplementedException();
+      return _context.Users.Where(user => user.Id == id).FirstOrDefault();
     }
 
-    public Task Update(User user)
+    public async Task Update(User user)
     {
-      throw new NotImplementedException();
+      _context.Users.Update(user);
+      await _context.SaveChangesAsync();
     }
   }
 }
