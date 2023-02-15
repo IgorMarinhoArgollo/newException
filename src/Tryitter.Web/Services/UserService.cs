@@ -18,8 +18,7 @@ namespace Tryitter.Web.Services
     }
     public async Task<bool> Create(UserRequest user)
     {
-      User newUser = new() { Name = user.Name, Email = user.Email, Password = user.Password, Posts = user.Posts };
-      await _repository.Create(newUser);
+      await _repository.Create(_mapper.Map<User>(user));
       return true;
     }
 
@@ -46,8 +45,7 @@ namespace Tryitter.Web.Services
     {
       var userFound = await _repository.GetById(id);
       if (userFound == null) return false;
-      User newUser = new() { Id = userFound.Id, Name = user.Name, Email = user.Email, Password = user.Password, Posts = user.Posts };
-      await _repository.Update(newUser);
+      await _repository.Update(_mapper.Map<User>(user));
       return true;
     }
   }

@@ -18,8 +18,7 @@ namespace Tryitter.Web.Services
 
     public async Task<bool> Create(PostRequest post)
     {
-      Post newPost = new() {Title = post.Title, Text = post.Text, Image = post.Image };
-      await _repository.Create(newPost);
+      await _repository.Create(_mapper.Map<Post>(post));
       return true;
     }
 
@@ -46,8 +45,7 @@ namespace Tryitter.Web.Services
     {
       var postFound = await _repository.GetById(id);
       if (postFound == null) return false;
-      Post newPost = new() { Id = postFound.Id,  Title = post.Title, Text = post.Text, Image = post.Image };
-      await _repository.Update(newPost);
+      await _repository.Update(_mapper.Map<Post>(post));
       return true;
     }
   }
