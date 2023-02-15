@@ -1,9 +1,10 @@
 using AutoMapper;
 using Tryitter.Domain.DTOs;
 using Tryitter.Domain.Models;
+using Tryitter.Domain.Services;
 using Tryitter.Infra.Repository;
 
-namespace Tryitter.Domain.Services
+namespace Tryitter.Web.Services
 {
   public class UserService : IUserService
   {

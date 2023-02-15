@@ -2,7 +2,7 @@ using Tryitter.Infra.Context;
 using Tryitter.Domain.Interfaces.Repository;
 using Tryitter.Infra.Repository;
 using Tryitter.Domain.Services;
-
+using Tryitter.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
