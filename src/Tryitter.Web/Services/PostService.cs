@@ -16,10 +16,10 @@ namespace Tryitter.Web.Services
       _mapper = mapper;
     }
 
-    public async Task<bool> Create(PostRequest post)
+    public async Task<PostResponse> Create(PostRequest post)
     {
-      await _repository.Create(_mapper.Map<Post>(post));
-      return true;
+      var result = await _repository.Create(_mapper.Map<Post>(post));
+      return _mapper.Map<PostResponse>(result);
     }
 
     public async Task<bool> Delete(int id)
@@ -41,12 +41,12 @@ namespace Tryitter.Web.Services
       return _mapper.Map<PostResponse>(post);
     }
 
-    public async Task<bool> Update(int id, PostRequest post)
+    public async Task<PostResponse> Update(int id, PostRequest post)
     {
       var postFound = await _repository.GetById(id);
-      if (postFound == null) return false;
-      await _repository.Update(_mapper.Map<Post>(post));
-      return true;
+      if (postFound == null) return null;
+     var result = await _repository.Update(_mapper.Map<Post>(post));
+      return _mapper.Map<PostResponse>(result);
     }
   }
 }

@@ -6,8 +6,8 @@ namespace Tryitter.Domain.Services
   {
     Task<IEnumerable<PostResponse>> GetAll();
     Task<PostResponse> GetById(int id);
-    Task<bool> Create(PostRequest post);
-    Task<bool> Update(int id, PostRequest post);
+    Task<PostResponse> Create(PostRequest post);
+    Task<PostResponse> Update(int id, PostRequest post);
     Task<bool> Delete(int id);
   }
   
