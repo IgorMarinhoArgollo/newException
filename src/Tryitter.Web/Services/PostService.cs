@@ -1,3 +1,4 @@
+using AutoMapper;
 using Tryitter.Domain.DTOs;
 using Tryitter.Domain.Models;
 using Tryitter.Infra.Repository;
@@ -7,9 +8,11 @@ namespace Tryitter.Domain.Services
   public class PostService : IPostService
   {
     private readonly PostRepository _repository;
-    public PostService(PostRepository repository)
+    private readonly IMapper _mapper;
+    public PostService(PostRepository repository, IMapper mapper)
     {
       _repository = repository;
+      _mapper = mapper;
     }
 
     public async Task<bool> Create(PostRequest post)
@@ -26,14 +29,16 @@ namespace Tryitter.Domain.Services
       else return true;
     }
 
-    public async Task<IEnumerable<Post>> GetAll()
+    public async Task<IEnumerable<PostResponse>> GetAll()
     {
-      return await _repository.GetAll();
+      var posts = await _repository.GetAll();
+      return posts.Select(post => _mapper.Map<PostResponse>(post));
     }
 
-    public async Task<Post> GetById(int id)
+    public async Task<PostResponse> GetById(int id)
     {
-      return await _repository.GetById(id);
+      var post = await _repository.GetById(id);
+      return _mapper.Map<PostResponse>(post);
     }
 
     public async Task<bool> Update(int id, PostRequest post)
