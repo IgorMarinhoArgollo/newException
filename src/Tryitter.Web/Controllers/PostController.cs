@@ -38,15 +38,18 @@ public class PostController : ControllerBase
   }
 
   [HttpPost]
-  public async Task<ActionResult> Create(UserRequest request)
+  public async Task<ActionResult> Create([FromBody] PostRequest request)
   {
-    throw NotImplementedException();
+    var result = await _service.Create(request);
+    return CreatedAtAction("GetById", new{ id = result.Id}, result );
   }
-
   [HttpPut("{id}")]
-  public async Task<ActionResult> Update(int id, UserRequest request)
+    public async Task<ActionResult> Update(int id, [FromBody] PostRequest request)
   {
-    throw NotImplementedException();
+    var postFound = await _service.GetById(id);
+    if(postFound == null) return NotFound("Post not found");
+    var result = await _service.Update(id, request);
+    return Ok(result);
   }
 
   [HttpDelete("{id}")]

@@ -40,13 +40,17 @@ public class UserController : ControllerBase
   [HttpPost]
   public async Task<ActionResult> Create(UserRequest request)
   {
-    throw NotImplementedException();
+    var result = await _service.Create(request);
+    return CreatedAtAction("GetById", new{ id = result.Id}, result );
   }
 
   [HttpPut("{id}")]
   public async Task<ActionResult> Update(int id, UserRequest request)
   {
-    throw NotImplementedException();
+    var userFound = await _service.GetById(id);
+    if(userFound == null) return NotFound("User not found");
+    var result = await _service.Update(id, request);
+    return Ok(result);
   }
 
   [HttpDelete("{id}")]

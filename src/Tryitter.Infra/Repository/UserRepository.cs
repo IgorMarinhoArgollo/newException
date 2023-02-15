@@ -37,10 +37,11 @@ namespace Tryitter.Infra.Repository
       return _context.Users.Where(user => user.Id == id).FirstOrDefault();
     }
 
-    public async Task Update(User user)
+    public async Task<User> Update(User user)
     {
       _context.Users.Update(user);
       await _context.SaveChangesAsync();
+      return user;
     }
   }
 }

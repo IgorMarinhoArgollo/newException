@@ -9,7 +9,7 @@ public interface IPostRepository
   Task<IEnumerable<Post>> GetAll();
   Task<Post> GetById(int id);
   Task<Post> Create(Post post);
-  Task Update(Post post);
+   Task<Post> Update(Post post);
   Task Delete(Post post);
 
 }
