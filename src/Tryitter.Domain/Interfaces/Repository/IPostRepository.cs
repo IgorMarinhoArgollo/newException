@@ -4,10 +4,12 @@ using Tryitter.Domain.Models;
 
 namespace Tryitter.Domain.Interfaces.Repository;
 
-public interface IPostRepository : IEntityBaseRepository<Post>
+public interface IPostRepository
 {
-  IEnumerable<Post> GetAllAsync();
-  Post GetPostByIdAsync(int id);
-  void AddPost(Post post);
+  Task<IEnumerable<Post>> GetAll();
+  Task<Post> GetById(int id);
+  Task<Post> Create(Post post);
+  Task Update(Post post);
+  Task Delete(Post post);
 
 }
