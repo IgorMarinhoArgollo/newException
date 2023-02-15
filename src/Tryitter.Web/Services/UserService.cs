@@ -1,3 +1,4 @@
+using AutoMapper;
 using Tryitter.Domain.DTOs;
 using Tryitter.Domain.Models;
 using Tryitter.Infra.Repository;
@@ -7,10 +8,12 @@ namespace Tryitter.Domain.Services
   public class UserService : IUserService
   {
     private readonly UserRepository _repository;
+    private readonly IMapper _mapper;
 
-    public UserService(UserRepository repository)
+    public UserService(UserRepository repository, IMapper mapper)
     {
       _repository = repository;
+      _mapper = mapper;
     }
     public async Task<bool> Create(UserRequest user)
     {
@@ -26,14 +29,16 @@ namespace Tryitter.Domain.Services
       else return true;
     }
 
-    public async Task<IEnumerable<User>> GetAll()
+    public async Task<IEnumerable<UserResponse>> GetAll()
     {
-      return await _repository.GetAll();
+      var users = await _repository.GetAll();
+      return users.Select(user => _mapper.Map<UserResponse>(user));
     }
 
-    public async Task<User> GetById(int id)
+    public async Task<UserResponse> GetById(int id)
     {
-      return await _repository.GetById(id);
+      var user = await _repository.GetById(id);
+      return _mapper.Map<UserResponse>(user);
     }
 
     public async Task<bool> Update(int id, UserRequest user)
@@ -45,6 +50,4 @@ namespace Tryitter.Domain.Services
       return true;
     }
   }
-
-
 }
