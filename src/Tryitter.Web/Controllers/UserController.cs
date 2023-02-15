@@ -19,33 +19,45 @@ public class UserController : ControllerBase
   }
 
   [HttpGet]
-  public ActionResult GetAll()
+  public async Task<ActionResult> GetAll()
   {
-    throw NotImplementedException();
+    return Ok(await _service.GetAll());
   }
 
   [HttpGet("{id}")]
-  public ActionResult GetById(int id)
+  public async Task<ActionResult> GetById(int id)
   {
-    throw NotImplementedException();
+    var result = await _service.GetById(id);
 
+    if (result != null)
+    {
+      return Ok(result);
+    }
+
+    return NotFound("User not found");
   }
 
   [HttpPost]
-  public ActionResult Create(UserRequest request)
+  public async Task<ActionResult> Create(UserRequest request)
   {
     throw NotImplementedException();
   }
 
   [HttpPut("{id}")]
-  public ActionResult Update(int id, UserRequest request)
+  public async Task<ActionResult> Update(int id, UserRequest request)
   {
     throw NotImplementedException();
   }
 
   [HttpDelete("{id}")]
-  public ActionResult Delete(int id)
+  public async Task<ActionResult> Delete(int id)
   {
-    throw NotImplementedException();
+    bool _post = await _service.Delete(id);
+
+    if (_post == true)
+    {
+      return NoContent();
+    }
+    return NotFound("User not found");
   }
 }
