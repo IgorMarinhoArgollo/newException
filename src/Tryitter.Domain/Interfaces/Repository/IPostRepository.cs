@@ -7,6 +7,5 @@ namespace Tryitter.Domain.Interfaces.Repository;
 public interface IPostRepository : IEntityBaseRepository<Post>
 {
     Task<IEnumerable<Post>> GetAllAsync();
-    Task<Post> GetAddressByIdAsync(int id);
-    Task<Post> GetByNameAsync(string name);
+    Task<Post> GetPostByIdAsync(int id);
 }
