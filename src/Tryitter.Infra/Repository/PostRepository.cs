@@ -1,37 +1,42 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Tryitter.Domain.Interfaces.Repository;
 using Tryitter.Domain.Models;
 using Tryitter.Infra.Context;
+using Tryitter.Domain.Interfaces.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace Tryitter.Infra.Repository
 {
-  public class PostRepository : EntityBaseRepository<Post>, IPostRepository
+  public class PostRepository : IPostRepository
   {
-    protected readonly TryitterContext _context;
+    private readonly TryitterContext _context;
 
     public PostRepository(TryitterContext context)
-            : base(context)
     {
       _context = context;
     }
 
-    public IEnumerable<Post> GetAllAsync()
+    public Task<Post> Create(Post post)
     {
-      return _context.Posts;
+      throw new NotImplementedException();
     }
 
-    public Post GetPostByIdAsync(int id)
+    public Task Delete(Post post)
     {
-      return _context.Posts.Where(post => post.Id == id).FirstOrDefault();
+      throw new NotImplementedException();
     }
-    public void AddPost(Post post)
+
+    public Task<IEnumerable<Post>> GetAll()
     {
-      _context.Posts.Add(post);
-      var user = _context.Users.Where(user => user == post.User).FirstOrDefault();
-      user.Posts.Add(post);
-      _context.SaveChanges();
+      throw new NotImplementedException();
+    }
+
+    public Task<Post> GetById(int id)
+    {
+      throw new NotImplementedException();
+    }
+
+    public Task Update(Post post)
+    {
+      throw new NotImplementedException();
     }
   }
 }

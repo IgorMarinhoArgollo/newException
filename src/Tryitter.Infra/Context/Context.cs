@@ -1,5 +1,4 @@
 using Tryitter.Domain.Models;
-using Tryitter.Infra.Mapping;
 using Microsoft.EntityFrameworkCore;
 
 namespace Tryitter.Infra.Context
@@ -7,16 +6,62 @@ namespace Tryitter.Infra.Context
   public class TryitterContext : DbContext
   {
     public TryitterContext(DbContextOptions<TryitterContext> options)
-            : base(options)
-    { }
+    : base(options) { }
 
     public DbSet<User> Users { get; set; } = null!;
     public DbSet<Post> Posts { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-      modelBuilder.ApplyConfiguration(new UserMap());
-      modelBuilder.ApplyConfiguration(new PostMap());
+      // keys
+      modelBuilder.Entity<Post>()
+      .HasKey(post => post.Id);
+
+      modelBuilder.Entity<User>()
+      .HasKey(user => user.Id);
+
+      // Properties
+        // Posts
+      modelBuilder.Entity<Post>()
+      .Property(post => post.Title)
+                .HasColumnType("VARCHAR(120)")
+                .HasMaxLength(120)
+                .IsRequired();
+      modelBuilder.Entity<Post>()
+      .Property(post => post.Text)
+                .HasColumnType("VARCHAR(120)")
+                .HasMaxLength(120)
+                .IsRequired();
+
+      modelBuilder.Entity<Post>()
+      .Property(post => post.Image)
+                .HasColumnType("VARCHAR(500)")
+                .HasMaxLength(500);
+
+        // Users
+      modelBuilder.Entity<User>()
+      .Property(user => user.Name)
+                .HasColumnType("VARCHAR(120)")
+                .HasMaxLength(120)
+                .IsRequired();
+
+      modelBuilder.Entity<User>()
+      .Property(user => user.Email)
+                .HasColumnType("VARCHAR(120)")
+                .HasMaxLength(120)
+                .IsRequired();
+
+      modelBuilder.Entity<User>()
+      .Property(user => user.Password)
+          .HasColumnType("VARCHAR(30)")
+          .HasMaxLength(30)
+          .IsRequired();
+
+      // Relations
+      modelBuilder.Entity<User>()
+          .HasMany(user => user.Posts)
+          .WithOne(post => post.user)
+          .HasForeignKey(post => post.UserId);
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -24,30 +69,14 @@ namespace Tryitter.Infra.Context
       {
         optionsBuilder.UseSqlServer(@"
                 Server=127.0.0.1;
-                Database=my_context_db;
+                Database=Tryitter;
                 User=SA;
                 Password=Teste123;
             ");
       }
     }
 
-    public override int SaveChanges()
-    {
-      foreach (var entry in ChangeTracker.Entries().Where(entity => entity.Entity.GetType().GetProperty("DateCreated") != null))
-      {
-        if (entry.State == EntityState.Added)
-        {
-          entry.Property("DateCreated").CurrentValue = DateTime.Now;
-        }
 
-        if (entry.State == EntityState.Modified)
-        {
-          entry.Property("DateCreated").IsModified = false;
-        }
-      }
-
-      return base.SaveChanges();
-    }
   }
 }
 
