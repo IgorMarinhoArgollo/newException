@@ -1,11 +1,10 @@
-using Microsoft.AspNetCore.Http;
-using System.Linq;
+/* using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using Tryitter.Domain.Interfaces.Identity;
 
 namespace Tryitter.Infra.Identity
 {
-    public class IdentityService : IIdentityService
+  public class IdentityService : IIdentityService
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 
@@ -16,4 +15,4 @@ namespace Tryitter.Infra.Identity
 
         public string GetScope() => _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.System)?.Value;
     }
-}
+} */

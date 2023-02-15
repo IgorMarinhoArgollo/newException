@@ -30,15 +30,6 @@ public class UserUpdateValidation : AbstractValidator<User>
         .NotNull()
         .WithMessage("Password can not be null");
 
-    RuleFor(user => user)
-        .MustAsync(ValidationName)
-        .WithMessage("User already registered");
   }
 
-  private async Task<bool> ValidationName(User user, CancellationToken cancellationToken)
-  {
-    var userRepository = await _userRepository.GetByNameAsync(user.Name);
-
-    return (userRepository?.Id) == user.Id;
-  }
 }

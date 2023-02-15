@@ -4,9 +4,9 @@ using Tryitter.Domain.Models;
 
 namespace Tryitter.Domain.Interfaces.Repository;
 
-public interface IUserRepository : IEntityBaseRepository<User>
+public interface IUserRepository
 {
-    Task<IEnumerable<User>> GetAllAsync();
-    Task<User> GetAddressByIdAsync(int id);
-    Task<User> GetByNameAsync(string name);
+  IEnumerable<User> GetAllAsync();
+  User GetUserByIdAsync(int id);
+
 }

@@ -26,15 +26,5 @@ public class UserInsertValidation : AbstractValidator<User>
         .NotNull()
         .WithMessage("Name can not be null");
 
-    RuleFor(user => user)
-        .MustAsync(ValidationName)
-        .WithMessage("User already registered");
-  }
-
-  private async Task<bool> ValidationName(User user, CancellationToken cancellationToken)
-  {
-    var userRepository = await _userRepository.GetByNameAsync(user.Name);
-
-    return user.Name != userRepository?.Name;
   }
 }

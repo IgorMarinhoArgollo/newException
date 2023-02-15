@@ -10,4 +10,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Tryitter.Domain\Tryitter.Domain.csproj" />
+    <ProjectReference Include="..\Tryitter.Infra\Tryitter.Infra.csproj" />
+  </ItemGroup>
+
 </Project>

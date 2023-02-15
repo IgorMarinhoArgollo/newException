@@ -1,6 +1,6 @@
-namespace Tryitter.Domain.Interfaces.Identity;
+/* namespace Tryitter.Domain.Interfaces.Identity;
 
 public interface IIdentityService
 {
   string GetScope();
-}
+} */
