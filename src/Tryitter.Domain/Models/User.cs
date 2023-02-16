@@ -18,6 +18,6 @@ namespace Tryitter.Domain.Models
     [Required]
     [MinLength(6, ErrorMessage = "Password must be greater than 6 characteres")]
     public string Password { get; set; }
-    public ICollection<Post>? Posts {get; set;}    
+    public virtual ICollection<Post> Posts {get; set;}    
   }
 }
