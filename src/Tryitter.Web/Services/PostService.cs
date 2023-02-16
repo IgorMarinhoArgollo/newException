@@ -2,15 +2,15 @@ using AutoMapper;
 using Tryitter.Domain.DTOs;
 using Tryitter.Domain.Models;
 using Tryitter.Domain.Services;
-using Tryitter.Infra.Repository;
+using Tryitter.Domain.Interfaces.Repository;
 
 namespace Tryitter.Web.Services
 {
   public class PostService : IPostService
   {
-    private readonly PostRepository _repository;
+    private readonly IPostRepository _repository;
     private readonly IMapper _mapper;
-    public PostService(PostRepository repository, IMapper mapper)
+    public PostService(IPostRepository repository, IMapper mapper)
     {
       _repository = repository;
       _mapper = mapper;

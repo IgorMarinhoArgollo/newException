@@ -1,17 +1,17 @@
 using AutoMapper;
 using Tryitter.Domain.DTOs;
+using Tryitter.Domain.Interfaces.Repository;
 using Tryitter.Domain.Models;
 using Tryitter.Domain.Services;
-using Tryitter.Infra.Repository;
 
 namespace Tryitter.Web.Services
 {
   public class UserService : IUserService
   {
-    private readonly UserRepository _repository;
+    private readonly IUserRepository _repository;
     private readonly IMapper _mapper;
 
-    public UserService(UserRepository repository, IMapper mapper)
+    public UserService(IUserRepository repository, IMapper mapper)
     {
       _repository = repository;
       _mapper = mapper;
